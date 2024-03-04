@@ -125,80 +125,9 @@ class Library_admin extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == addButton) {
-            String[] book = new String[7];
-            book[0] = textField1.getText();
-            book[1] = textField2.getText();
-            book[2] = textField3.getText();
-            book[3] = textField4.getText();
-            book[4] = textField5.getText();
-            book[5] = textField6.getText();
-            book[6] = textField7.getText();
-            books.add(book);
-            JOptionPane.showMessageDialog(this, "Book added successfully");
-            clearFields();
-        } else if (e.getSource() == viewButton) {
-            String[] columns = { "Book ID", "Book Title", "Author", "Publisher", "Year of Publication", "ISBN",
-                    "Number of Copies" };
-            Object[][] data = new Object[books.size()][7];
-            for (int i = 0; i < books.size(); i++) {
-                data[i][0] = books.get(i)[0];
-                data[i][1] = books.get(i)[1];
-                data[i][2] = books.get(i)[2];
-                data[i][3] = books.get(i)[3];
-                data[i][4] = books.get(i)[4];
-                data[i][5] = books.get(i)[5];
-                data[i][6] = books.get(i)[6];
-            }
-            JTable table = new JTable(data, columns);
-            JScrollPane scrollPane = new JScrollPane(table);
-            JFrame frame = new JFrame("View Books");
-            frame.add(scrollPane);
-            frame.setSize(800, 400);
-            frame.setVisible(true);
-        } else if (e.getSource() == editButton) { // update
-            String bookID = JOptionPane.showInputDialog(this, "Enter book ID to edit:");
-            for (int i = 0; i < books.size(); i++) {
-                if (books.get(i)[0].equals(bookID)) {
-                    String[] book = new String[7];
-                    book[0] = bookID;
-                    book[1] = textField2.getText();
-                    book[2] = textField3.getText();
-                    book[3] = textField4.getText();
-                    book[4] = textField5.getText();
-                    book[5] = textField6.getText();
-                    book[6] = textField7.getText();
-                    books.set(i, book);
-                    JOptionPane.showMessageDialog(this, "Book edited successfully");
-                    clearFields();
-                    return;
-                }
-            }
-            JOptionPane.showMessageDialog(this, "Book not found");
-        } else if (e.getSource() == deleteButton) { // delete
-            String bookID = JOptionPane.showInputDialog(this, "Enter book ID to delete:");
-            for (int i = 0; i < books.size(); i++) {
-                if (books.get(i)[0].equals(bookID)) {
-                    books.remove(i);
-                    JOptionPane.showMessageDialog(this, "Book deleted successfully");
-                    clearFields();
-                    return;
-                }
-            }
-            JOptionPane.showMessageDialog(this, "Book not found");
-        } else if (e.getSource() == clearButton) { // clear
-            clearFields();
-        } else if (e.getSource() == exitButton) { // exit
-            writeUpdateFileArray();
-            try {// pause execution for 2 seconds
-                Thread.sleep(2000);
-            } catch (InterruptedException ex) {// handle the exception
-                System.out.println("Sleep was interrupted");
-            }
-            System.exit(0);
-        }
-    }
+    // public void actionPerformed(ActionEvent e) {
+        
+    // }
 
     private void clearFields() {
         textField1.setText("");
@@ -349,6 +278,78 @@ class Library_user extends JFrame implements ActionListener {
     private void clearFields() { // clear
         textField1.setText("");
         textField2.setText("");
+    }
+    if (e.getSource() == addButton) {
+        String[] book = new String[7];
+        book[0] = textField1.getText();
+        book[1] = textField2.getText();
+        book[2] = textField3.getText();
+        book[3] = textField4.getText();
+        book[4] = textField5.getText();
+        book[5] = textField6.getText();
+        book[6] = textField7.getText();
+        books.add(book);
+        JOptionPane.showMessageDialog(this, "Book added successfully");
+        clearFields();
+    } else if (e.getSource() == viewButton) {
+        String[] columns = { "Book ID", "Book Title", "Author", "Publisher", "Year of Publication", "ISBN",
+                "Number of Copies" };
+        Object[][] data = new Object[books.size()][7];
+        for (int i = 0; i < books.size(); i++) {
+            data[i][0] = books.get(i)[0];
+            data[i][1] = books.get(i)[1];
+            data[i][2] = books.get(i)[2];
+            data[i][3] = books.get(i)[3];
+            data[i][4] = books.get(i)[4];
+            data[i][5] = books.get(i)[5];
+            data[i][6] = books.get(i)[6];
+        }
+        JTable table = new JTable(data, columns);
+        JScrollPane scrollPane = new JScrollPane(table);
+        JFrame frame = new JFrame("View Books");
+        frame.add(scrollPane);
+        frame.setSize(800, 400);
+        frame.setVisible(true);
+    } else if (e.getSource() == editButton) { // update
+        String bookID = JOptionPane.showInputDialog(this, "Enter book ID to edit:");
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i)[0].equals(bookID)) {
+                String[] book = new String[7];
+                book[0] = bookID;
+                book[1] = textField2.getText();
+                book[2] = textField3.getText();
+                book[3] = textField4.getText();
+                book[4] = textField5.getText();
+                book[5] = textField6.getText();
+                book[6] = textField7.getText();
+                books.set(i, book);
+                JOptionPane.showMessageDialog(this, "Book edited successfully");
+                clearFields();
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Book not found");
+    } else if (e.getSource() == deleteButton) { // delete
+        String bookID = JOptionPane.showInputDialog(this, "Enter book ID to delete:");
+        for (int i = 0; i < books.size(); i++) {
+            if (books.get(i)[0].equals(bookID)) {
+                books.remove(i);
+                JOptionPane.showMessageDialog(this, "Book deleted successfully");
+                clearFields();
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Book not found");
+    } else if (e.getSource() == clearButton) { // clear
+        clearFields();
+    } else if (e.getSource() == exitButton) { // exit
+        writeUpdateFileArray();
+        try {// pause execution for 2 seconds
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {// handle the exception
+            System.out.println("Sleep was interrupted");
+        }
+        System.exit(0);
     }
 }
 
